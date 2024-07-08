@@ -5,7 +5,7 @@ let postSchema = new mongoose.Schema({
     description: String,
     image : String,
     publish : Boolean,
-    status: Boolean,
+    status: Date,
     features: [String],
 },{
     timestamps: true

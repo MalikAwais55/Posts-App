@@ -6,9 +6,11 @@ const app = express()
 
 
 connectDB();
+app.use(express.json())
+app.use("/api", router)
+app.use("/api", router)
 
 app.listen(port,()=>{
     console.log(`App is listening to the Port ${port}`)
 })
 
-app.use("/api", router)
