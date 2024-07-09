@@ -1,16 +1,15 @@
-const express  = require ('express');
+const express = require("express");
 const connectDB = require("./config/dbConnection");
-const {port} = require ("./config/vars");
+const { port } = require("./config/vars");
 const router = require("./routes/post.route");
-const app = express()
-
+const app = express();
 
 connectDB();
-app.use(express.json())
-app.use("/api", router)
-app.use("/api", router)
+app.use(express.json());
 
-app.listen(port,()=>{
-    console.log(`App is listening to the Port ${port}`)
-})
+// Mount Routes
+app.use("/api", router);
 
+app.listen(port, () => {
+  console.log(`App is listening to the Port ${port}`);
+});
