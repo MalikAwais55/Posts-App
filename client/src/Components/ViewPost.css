@@ -1,0 +1,88 @@
+body {
+  background-color: #000;
+  color: #fff;
+  background-image: linear-gradient(62deg, #3a3d40 0%, #181719 100%);
+}
+
+.btn1 {
+  position: absolute;
+  top: 77px;
+  right: 98px;
+  background-color: #be3144;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.card-wrapper {
+  padding: 30px;
+  margin-top: 30px;
+}
+
+.card-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1rem;
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.card {
+  border: 2px solid black;
+}
+
+.card img {
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.button-container .btn {
+  flex: 1;
+  margin: 0 5px;
+}
+
+.button-container .btn:first-child {
+  margin-left: 0;
+}
+
+.button-container .btn:last-child {
+  margin-right: 0;
+}
+
+/* Keep the existing button styles for consistency */
+.btn {
+  color: #ffff;
+  background-color: #be3144;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 20px;
+  display: inline-block;
+  cursor: pointer;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}

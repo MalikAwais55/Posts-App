@@ -1,14 +1,16 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 const Post = require("../models/postModel");
 
 const addPost = async (req, res) => {
   try {
     const file = req.file;
     const payload = req.body;
-    // req.params
-
     if (file) {
-      payload.image = file.originalname;
+      payload.image = file.filename;
+    }
+
+    if(payload.features) {
+      payload.features = JSON.parse( payload.features )
     }
 
     const post = await Post.create(payload);
@@ -32,24 +34,23 @@ const viewPost = async (req, res) => {
   }
 };
 
-
 const editPost = async (req, res) => {
   try {
     const postId = req.params.id;
-    const payload = req.body
+    const payload = req.body;
     if (!mongoose.Types.ObjectId.isValid(postId)) {
-      return res.status(404).send({ message: "The Given PostId Is Invalid" })
+      return res.status(404).send({ message: "The Given PostId Is Invalid" });
     }
-    const post = await Post.findByIdAndUpdate(postId, payload, { new: true })
+    const post = await Post.findByIdAndUpdate(postId, payload, { new: true });
     res.status(201).send({
       message: "Post Is Being Updated Sucessfully",
-      Post: post
-    })
+      Post: post,
+    });
   } catch (error) {
-    console.log("Error", error)
-    res.status(500).send({ message: "Something Went Wrong" })
+    console.log("Error", error);
+    res.status(500).send({ message: "Something Went Wrong" });
   }
-}
+};
 
 const deletePost = async (req, res) => {
   try {
@@ -61,7 +62,7 @@ const deletePost = async (req, res) => {
       return res.status(404).send({ message: "Post Not Found" });
     }
 
-    res.status(200).send({ message: "Post Deleted Sucessfully", postId });
+    res.status(200).send({ message: "Post Deleted Sucessfully" });
   } catch (error) {
     console.log("Error", error);
     res.status(500).send({
