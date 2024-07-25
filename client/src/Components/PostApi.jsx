@@ -1,7 +1,7 @@
 import { apiUrl } from "../Config/vars";
 
 export const addPost = (formdata, id) => {
-  fetch(`${apiUrl}/newPost`, {
+  fetch(`${apiUrl}/posts/newPost`, {
     method: "POST",
     body: formdata,
   })
@@ -18,7 +18,7 @@ export const addPost = (formdata, id) => {
 };
 
 export const handleDelete = (postId) => {
-  fetch(`${apiUrl}/deletePost/${postId}`, { method: "DELETE" })
+  fetch(`${apiUrl}/posts/deletePost/${postId}`, { method: "DELETE" })
     .then((response) => {
       if (!response.ok) {
         throw new Error(
@@ -36,7 +36,7 @@ export const handleDelete = (postId) => {
 };
 
 export const editPost = (formdata, postId) => {
-  fetch(`${apiUrl}/editPost/${postId}`, { method: "PUT", body: formdata })
+  fetch(`${apiUrl}/posts/editPost/${postId}`, { method: "PUT", body: formdata })
     .then((response) => {
       if (!response.ok) {
         throw new Error(
@@ -49,27 +49,27 @@ export const editPost = (formdata, postId) => {
     .catch((error) => console.error("Error While Deleting The Post", error));
 };
 
-export const viewPost = async (page, limit, title,status,publish) => {
+export const viewPost = async (page, limit, title, status, publish) => {
   try {
-    const paramsObj = { };
-    if(title){
+    const paramsObj = {};
+    if (title) {
       paramsObj.title = title
     }
 
-    if(status){
+    if (status) {
       paramsObj.status = status
     }
-    if(publish !== undefined){
-      paramsObj.publish= publish
+    if (publish !== undefined) {
+      paramsObj.publish = publish
     }
 
     let searchParams = new URLSearchParams(paramsObj);
-      searchParams = searchParams.toString()
+    searchParams = searchParams.toString()
 
 
-    let url = `${apiUrl}/viewPost?page=${page}&limit=${limit}`
-    if(searchParams){
-        url = `${url}&${searchParams}`
+    let url = `${apiUrl}/posts/viewPost?page=${page}&limit=${limit}`
+    if (searchParams) {
+      url = `${url}&${searchParams}`
     }
 
     const response = await fetch(url);
@@ -77,7 +77,7 @@ export const viewPost = async (page, limit, title,status,publish) => {
       throw new Error("Network response was not ok");
     }
     const data = await response.json();
-    return data; 
+    return data;
   } catch (error) {
     console.error("Error fetching posts:", error);
     return [];

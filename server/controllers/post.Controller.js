@@ -36,9 +36,7 @@ const viewPost = async (req, res) => {
     let pagination = {
       total,
       page,
-      limit,
-      totalPages: total / limit
-
+      limit
     }
 
     const postList = await Post.find(query).sort({ createdAt: -1 }).limit(limit).skip((page - 1) * limit)
