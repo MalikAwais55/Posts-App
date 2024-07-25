@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Post = require("../models/postModel");
+const { options } = require("../routes/post.route");
 
 const addPost = async (req, res) => {
   try {
@@ -9,8 +10,8 @@ const addPost = async (req, res) => {
       payload.image = file.filename;
     }
 
-    if(payload.features) {
-      payload.features = JSON.parse( payload.features )
+    if (payload.features) {
+      payload.features = JSON.parse(payload.features)
     }
 
     const post = await Post.create(payload);
@@ -22,11 +23,29 @@ const addPost = async (req, res) => {
 
 const viewPost = async (req, res) => {
   try {
-    const postList = await Post.find();
-    console.log("Here Are The List Of Post", postList);
+    const { title, status, publish, limit, page } = req.query
+
+    console.log(req.query)
+
+    let query = {}
+    if (title) query.title = { $regex: title, $options: "i" }
+    if (status) query.status = status
+    if (publish) query.publish = publish
+
+    const total = await Post.countDocuments(query)
+    let pagination = {
+      total,
+      page,
+      limit,
+      totalPages: total / limit
+
+    }
+
+    const postList = await Post.find(query).sort({ createdAt: -1 }).limit(limit).skip((page - 1) * limit)
     res.status(200).send({
       message: "The List Of Post Are Given Below",
       Post: postList,
+      pagination
     });
   } catch (error) {
     console.log(error, "error");

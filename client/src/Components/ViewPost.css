@@ -6,8 +6,8 @@ body {
 
 .btn1 {
   position: absolute;
-  top: 77px;
-  right: 98px;
+  top: 91px;
+  right: 152px;
   background-color: #be3144;
   color: #fff;
   padding: 10px 20px;
@@ -54,7 +54,6 @@ body {
   text-align: center;
 }
 
-
 .button-container {
   display: flex;
   justify-content: space-between;
@@ -74,7 +73,6 @@ body {
   margin-right: 0;
 }
 
-/* Keep the existing button styles for consistency */
 .btn {
   color: #ffff;
   background-color: #be3144;
@@ -85,4 +83,67 @@ body {
   cursor: pointer;
   margin-top: 15px;
   margin-bottom: 15px;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px;
+}
+
+.form-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #be3144;
+  background-color: #fff;
+  color: #000;
+  min-width: 200px;
+  box-sizing: border-box;
+}
+
+.form-input::placeholder {
+  color: #000;
+}
+
+.btn2, .btn3 {
+  background-color: #be3144;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  margin-top: 20px;
+}
+
+.pagination a {
+  color: #be3144;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+  border-radius: 4px;
+}
+
+.pagination a.active {
+  background-color: #be3144;
+  color: white;
+  border: 1px solid #be3144;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.pagination a:first-child,
+.pagination a:last-child {
+  border-radius: 8px;
 }
