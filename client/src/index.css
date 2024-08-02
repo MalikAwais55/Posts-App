@@ -2,6 +2,11 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
+
+}
+
+a {
+  text-decoration: none;
 }
 
 .wrapper {
@@ -43,4 +48,13 @@ a:hover {
 .active {
   text-decoration: underline;
   color: #ffff;
+}
+
+.button1 {
+  color: #000;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 20px;
+  display: inline-block;
+  cursor: pointer
 }

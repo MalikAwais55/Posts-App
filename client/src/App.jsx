@@ -1,17 +1,20 @@
 import React from "react";
 import Navbar from "./Navbar";
 import { Route, Routes } from "react-router-dom";
-import Home from "./Components/Home";
-import ViewPost from "./Components/ViewPost";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ErrorComp from "./Components/ErrorComp"
+import routes from "./routes";
+
 
 function App() {
   return (
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/view" element={<ViewPost />} />
+        {routes.map((route, index) => (
+          <Route key={index} path={route.path} element={<route.layout><route.element /></route.layout>} />
+        ))}
+        <Route path="*" element={<ErrorComp />} />
       </Routes>
     </div>
   );

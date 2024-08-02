@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
+
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  background-image: linear-gradient(62deg, #3a3d40 0%, #181719 100%);
+  margin-top: 40px;
+}
+
+.SignUp-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #be3144;
+  padding: 19px 0px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.SignUp-container label {
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.SignUp-input {
+  width: calc(100% - 20px);
+  padding: 12px 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: "Raleway", sans-serif;
+  width: 317px;
+}
+
+.SignUp-button {
+  background-color: #be3144;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.SignUp-button:hover {
+  background: #ed0808;
+}
+.login-input {
+  width: 300px;
+}
+
+h1,
+h2 {
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+.form-control {
+  margin-bottom: 20px;
+}
+
+.error {
+  color: red;
+}

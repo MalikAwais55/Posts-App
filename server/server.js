@@ -13,6 +13,7 @@ app.use(express.static("uploads"));
 // Mount Routes
 app.use("/api", router);
 
+
 app.listen(port, () => {
   console.log(`App is listening to the Port ${port}`);
 });

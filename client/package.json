@@ -12,6 +12,7 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "formik": "^2.4.6",
+    "jsonwebtoken": "^9.0.2",
     "mdb-react-ui-kit": "^8.0.0",
     "rc-pagination": "^4.2.0",
     "react": "^18.3.1",
