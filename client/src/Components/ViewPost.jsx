@@ -168,7 +168,7 @@ function ViewPost() {
         </div>
       </div>
       <Pagination
-        total={pagination.total}
+        total={pagination?.total}
         pageSize={postPerPage}
         current={currentPage}
         onChange={(page) => handlePageChange(page)}

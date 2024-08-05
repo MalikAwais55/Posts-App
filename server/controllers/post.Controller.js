@@ -4,8 +4,11 @@ const { options } = require("../routes/post.route");
 
 const addPost = async (req, res) => {
   try {
+
+
     const file = req.file;
     const payload = req.body;
+    const userId = req.user;
     if (file) {
       payload.image = file.filename;
     }
@@ -13,7 +16,7 @@ const addPost = async (req, res) => {
     if (payload.features) {
       payload.features = JSON.parse(payload.features)
     }
-
+    payload.userId = userId
     const post = await Post.create(payload);
     res.status(201).send({ message: "Post Created Successfully", post });
   } catch (error) {

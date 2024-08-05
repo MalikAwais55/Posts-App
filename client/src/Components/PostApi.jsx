@@ -1,9 +1,12 @@
-import { apiUrl } from "../Config/vars";
+import { apiUrl, token } from "../Config/vars";
 
 export const addPost = (formdata, id) => {
   fetch(`${apiUrl}/posts/newPost`, {
     method: "POST",
     body: formdata,
+    headers:{
+      "Authorization" : `Bearer ${token}`
+    }
   })
     .then((response) => {
       if (!response.ok) {
@@ -51,6 +54,7 @@ export const editPost = (formdata, postId) => {
 
 export const viewPost = async (page, limit, title, status, publish) => {
   try {
+    
     const paramsObj = {};
     if (title) {
       paramsObj.title = title
@@ -72,7 +76,12 @@ export const viewPost = async (page, limit, title, status, publish) => {
       url = `${url}&${searchParams}`
     }
 
-    const response = await fetch(url);
+    const response = await fetch(url,{
+      headers:{
+       "Authorization" : `Bearer ${token}`
+      }
+    }
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }

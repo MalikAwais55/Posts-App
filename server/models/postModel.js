@@ -10,6 +10,7 @@ let postSchema = new mongoose.Schema({
         default: 0
     }, 
     features: [String], 
+    userId: mongoose.Types.ObjectId
 }, {
     timestamps: true
 }

@@ -15,6 +15,7 @@ label {
   display: block;
   margin: 10px 0 5px;
   font-weight: bold;
+  color: black;
 }
 
 input[type="text"],
