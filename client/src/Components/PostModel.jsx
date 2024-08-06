@@ -6,9 +6,9 @@ import Switch from "react-switch";
 import "./PostModel.css";
 import { addPost, editPost } from "./PostApi";
 import * as Yup from "yup";
-import { imageUrl } from "../Config/vars";
+import { ENV } from "../Config/vars";
 
-function PostModel({ show, setShow, type, selectedPost }) {
+function PostModel({ show, setShow, type, selectedPost, fetchData }) {
   const initialValues = {
     title: selectedPost?.title || "",
     description: selectedPost?.description || "",
@@ -19,9 +19,7 @@ function PostModel({ show, setShow, type, selectedPost }) {
   };
 
   const handleClose = () => setShow(false);
-  const onsubmit = (values) => {
-    console.log(values);
-
+  const onsubmit = async (values) => {
     const formdata = new FormData();
     formdata.append("title", values.title);
     formdata.append("description", values.description);
@@ -30,9 +28,13 @@ function PostModel({ show, setShow, type, selectedPost }) {
     formdata.append("status", values.status);
     formdata.append("features", JSON.stringify(values.features));
 
-    handleClose();
-    {
-      type === 1 ? addPost(formdata) : editPost(formdata, selectedPost._id);
+    const res =
+      type === 1
+        ? await addPost(formdata)
+        : await editPost(formdata, selectedPost._id);
+    if (res.status) {
+      handleClose();
+      fetchData();
     }
   };
   const validationSchema = Yup.object({
@@ -130,7 +132,7 @@ function PostModel({ show, setShow, type, selectedPost }) {
                     <img
                       src={
                         selectedPost?.image
-                          ? `${imageUrl}${values.image}`
+                          ? `${ENV.imageUrl}${values.image}`
                           : URL.createObjectURL(values.image)
                       }
                     />

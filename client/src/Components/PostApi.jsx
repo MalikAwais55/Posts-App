@@ -1,11 +1,11 @@
-import { apiUrl, token } from "../Config/vars";
+import {ENV} from "../Config/vars"
 
 export const addPost = (formdata, id) => {
-  fetch(`${apiUrl}/posts/newPost`, {
+  return fetch(`${ENV.apiUrl}/posts/newPost`, {
     method: "POST",
     body: formdata,
     headers:{
-      "Authorization" : `Bearer ${token}`
+      "Authorization" : `Bearer ${ENV.token}`
     }
   })
     .then((response) => {
@@ -16,12 +16,19 @@ export const addPost = (formdata, id) => {
     })
     .then((data) => {
       console.log("Post created successfully:", data);
+      return data
+
     })
     .catch((error) => console.log("Error While Posting The Data", error));
 };
 
 export const handleDelete = (postId) => {
-  fetch(`${apiUrl}/posts/deletePost/${postId}`, { method: "DELETE" })
+  fetch(`${ENV.apiUrl}/posts/deletePost/${postId}`, 
+    { method: "DELETE",
+      headers:{
+        "Authorization" : `Bearer ${ENV.token}`
+      }
+     })
     .then((response) => {
       if (!response.ok) {
         throw new Error(
@@ -39,7 +46,14 @@ export const handleDelete = (postId) => {
 };
 
 export const editPost = (formdata, postId) => {
-  fetch(`${apiUrl}/posts/editPost/${postId}`, { method: "PUT", body: formdata })
+  return fetch(`${ENV.apiUrl}/posts/editPost/${postId}`,
+     { 
+      method: "PUT", 
+      body: formdata,
+      headers:{
+        "Authorization" : `Bearer ${ENV.token}`
+      }
+    })
     .then((response) => {
       if (!response.ok) {
         throw new Error(
@@ -48,13 +62,17 @@ export const editPost = (formdata, postId) => {
       }
       return response.json();
     })
-    .then((data) => console.log("Post Has Been Edited Successfully", data))
+    .then((data) => {
+      console.log("Post Has Been Edited Successfully", data)
+      return data
+      })
+   
     .catch((error) => console.error("Error While Deleting The Post", error));
 };
 
-export const viewPost = async (page, limit, title, status, publish) => {
+export const viewPost = async (page, limit, title, status, publish,token) => {
   try {
-    
+
     const paramsObj = {};
     if (title) {
       paramsObj.title = title
@@ -70,15 +88,14 @@ export const viewPost = async (page, limit, title, status, publish) => {
     let searchParams = new URLSearchParams(paramsObj);
     searchParams = searchParams.toString()
 
-
-    let url = `${apiUrl}/posts/viewPost?page=${page}&limit=${limit}`
+    let url = `${ENV.apiUrl}/posts/viewPost?page=${page}&limit=${limit}`
     if (searchParams) {
       url = `${url}&${searchParams}`
     }
 
     const response = await fetch(url,{
       headers:{
-       "Authorization" : `Bearer ${token}`
+       "Authorization" : `Bearer ${ENV.token}`
       }
     }
     );

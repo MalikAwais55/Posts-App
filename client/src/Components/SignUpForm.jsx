@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "./SignUpForm.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -8,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function SignUpForm() {
   const [data, setData] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const initialValues = {
     name: "",
     email: "",
@@ -19,11 +18,11 @@ function SignUpForm() {
     try {
       const response = await signUp(values);
       setData(response);
-      if(response.status){
+      if (response.status) {
         navigate("/signIn");
       }
-      if(response.message === "User already exists")
-      console.log("Form Data", response);
+      if (response.message === "User already exists")
+        console.log("Form Data", response);
       resetForm();
     } catch (error) {
       console.log("Error in form submission", error);
@@ -82,7 +81,11 @@ function SignUpForm() {
                   />
                   <ErrorMessage name="password" />
                 </div>
-                <button type="submit" className="SignUp-button" disabled={isSubmitting}>
+                <button
+                  type="submit"
+                  className="SignUp-button"
+                  disabled={isSubmitting}
+                >
                   {isSubmitting ? "Submitting..." : "SignUp"}
                 </button>
               </Form>

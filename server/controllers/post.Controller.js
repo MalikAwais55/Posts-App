@@ -4,8 +4,6 @@ const { options } = require("../routes/post.route");
 
 const addPost = async (req, res) => {
   try {
-
-
     const file = req.file;
     const payload = req.body;
     const userId = req.user;
@@ -14,11 +12,13 @@ const addPost = async (req, res) => {
     }
 
     if (payload.features) {
-      payload.features = JSON.parse(payload.features)
+      payload.features = JSON.parse(payload.features);
     }
-    payload.userId = userId
+    payload.userId = userId;
     const post = await Post.create(payload);
-    res.status(201).send({ message: "Post Created Successfully", post });
+    res
+      .status(201)
+      .send({ message: "Post Created Successfully", post, status: true });
   } catch (error) {
     res.status(500).send({ message: "Something went wrong" });
   }
@@ -26,27 +26,28 @@ const addPost = async (req, res) => {
 
 const viewPost = async (req, res) => {
   try {
-    const { title, status, publish, limit, page } = req.query
+    const { title, status, publish, limit, page } = req.query;
+    const userId = req.user;
+    let query = { userId };
+    if (title) query.title = { $regex: title, $options: "i" };
+    if (status) query.status = status;
+    if (publish) query.publish = publish;
 
-    console.log(req.query)
-
-    let query = {}
-    if (title) query.title = { $regex: title, $options: "i" }
-    if (status) query.status = status
-    if (publish) query.publish = publish
-
-    const total = await Post.countDocuments(query)
+    const total = await Post.countDocuments(query);
     let pagination = {
       total,
       page,
-      limit
-    }
+      limit,
+    };
 
-    const postList = await Post.find(query).sort({ createdAt: -1 }).limit(limit).skip((page - 1) * limit)
+    const postList = await Post.find(query)
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .skip((page - 1) * limit);
     res.status(200).send({
       message: "The List Of Post Are Given Below",
       Post: postList,
-      pagination
+      pagination,
     });
   } catch (error) {
     console.log(error, "error");
@@ -65,6 +66,7 @@ const editPost = async (req, res) => {
     res.status(201).send({
       message: "Post Is Being Updated Sucessfully",
       Post: post,
+      status: true,
     });
   } catch (error) {
     console.log("Error", error);

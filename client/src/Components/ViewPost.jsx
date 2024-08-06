@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { apiUrl, imageUrl } from "../Config/vars";
+import { ENV } from "../Config/vars";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./ViewPost.css";
@@ -24,6 +24,7 @@ function ViewPost() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(10);
   const [pagination, setPagination] = useState({})
+
 
   const handlePageChange = async (page) => {
     const { Post, pagination } = await viewPost(page, postPerPage, title, status, publish);
@@ -76,7 +77,7 @@ function ViewPost() {
 
   useEffect(() => {
     fetchData();
-  }, [currentPage]);
+  }, []);
 
   const handleClick = (postId) => {
     confirmAlert({
@@ -85,7 +86,7 @@ function ViewPost() {
       buttons: [
         {
           label: "Yes",
-          onClick: () => handleDelete(postId),
+          onClick: () => {handleDelete(postId); fetchData()}
         },
         {
           label: "No",
@@ -134,13 +135,14 @@ function ViewPost() {
         setShow={setShow}
         type={type}
         selectedPost={selectedPost}
+        fetchData={fetchData}
       />
       <div className="card-wrapper">
         <div className="card-component">
           <div className="card-container">
             {posts?.map((post) => (
               <Card key={post._id} className="card">
-                <Card.Img variant="top" src={`${imageUrl}${post.image}`} />
+                <Card.Img variant="top" src={`${ENV.imageUrl}${post.image}`} />
                 <Card.Body className="card-body">
                   <Card.Title>{post.title}</Card.Title>
                   <Card.Text>{post.description}</Card.Text>

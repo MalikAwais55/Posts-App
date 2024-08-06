@@ -1,8 +1,8 @@
-import { apiUrl } from "../Config/vars";
+import { ENV } from "../Config/vars";
 
 export const signUp = (userData) => {
     console.log("Sending user data to API:", userData);
-    return fetch(`${apiUrl}/users/register`, {
+    return fetch(`${ENV.apiUrl}/users/register`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ export const signUp = (userData) => {
 
   export const signIn = async (userData) => {
     try {
-      const response = await fetch(`${apiUrl}/users/login`, {
+      const response = await fetch(`${ENV.apiUrl}/users/login`, {
         method: "POST",
         body: JSON.stringify(userData),
         headers: {

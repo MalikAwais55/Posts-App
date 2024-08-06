@@ -1,7 +1,5 @@
 import Alert from 'react-bootstrap/Alert';
-
 function ErrorComp() {
-
   return (
     <Alert variant="danger">
       <Alert.Heading style={{ color: "red" }}>Oh snap! You got an error!</Alert.Heading>
